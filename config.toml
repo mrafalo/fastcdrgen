@@ -1,0 +1,71 @@
+#general
+number_of_local_customers = 10000
+number_of_intl_customers = 100
+number_of_local_operators =  4
+number_of_intl_operators = 2
+number_of_bts = 100
+simbox_prc = 0.005
+probe_prc = 0.05
+multisim_prc = 0.01
+priv_prc = 0.7
+
+#relations
+avg_relation_friends_cnt_priv = 5
+std_relation_friends_cnt_priv = 10
+avg_relation_family_cnt_priv = 5
+std_relation_family_cnt_priv = 3
+avg_relation_other_cnt_priv = 3
+std_relation_other_cnt_priv = 5
+avg_relation_friends_cnt_business = 10
+std_relation_friends_cnt_business = 4
+avg_relation_family_cnt_business = 3
+std_relation_family_cnt_business = 3
+avg_relation_other_cnt_business = 10
+std_relation_other_cnt_business = 10
+avg_relation_cnt_probe = 20
+std_relation_cnt_probe = 20
+avg_relation_cnt_simbox = 20
+std_relation_cnt_simbox = 30
+avg_relation_cnt_multi = 40
+std_relation_cnt_multi = 20
+
+#calls
+avg_calls_cnt_per_relation_probe = 20
+stdev_calls_cnt_per_relation_probe = 10
+avg_calls_cnt_per_relation_simbox = 20
+stdev_calls_cnt_per_relation_simbox = 10
+avg_calls_cnt_per_relation_multi = 20
+stdev_calls_cnt_per_relation_multi = 5
+avg_calls_cnt_per_relation = 4
+stdev_calls_cnt_per_relation = 4
+avg_sms_cnt_per_relation = 4
+stdev_sms_cnt_per_relation = 8
+avg_mms_cnt_per_relation = 4
+stdev_mms_cnt_per_relation = 4
+
+#durations
+avg_call_duration_priv = 413
+std_call_duration_priv = 60
+avg_call_duration_business = 600
+std_call_duration_business = 70
+avg_call_duration_probe = 413
+std_call_duration_probe = 60
+avg_call_duration_simbox = 413
+std_call_duration_simbox = 60
+avg_call_duration_multi = 415
+std_call_duration_multi = 60
+
+avg_sms_cnt = 3
+avg_mms_cnt = 2
+
+#ditributions
+simbox_duration_distribution = 'WEIBULL' 
+probe_duration_distribution = 'POISON'
+business_duration_distribution = 'NORMAL'
+priv_duration_distribution = 'NORMAL'
+multi_duration_distribution = 'NORMAL'
+
+#technical
+start_date = '2024-05-01'
+batch_size = 100000
+resut_filename = 'results/cdr2.csv'
