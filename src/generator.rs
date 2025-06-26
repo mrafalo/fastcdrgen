@@ -183,7 +183,7 @@ impl Generator{
         }
 
         //MULTISIM
-        for i in msisdn_pos..msisdn_pos + draw_integer_from_uniform(1, (_cfg.multisim_prc * _cfg.number_of_local_customers as f32) as u32 + 3){
+        for i in msisdn_pos..msisdn_pos + draw_integer_from_uniform(1, (_cfg.multisim_prc * _cfg.number_of_local_customers as f32) as u32 + 1){
             let op = _operators[draw_integer_from_uniform(0, _operators.len() as u32)  as usize].clone();
             let loc_imei = get_imei(_cfg.number_of_local_customers + _cfg.number_of_intl_customers);
 
@@ -224,35 +224,41 @@ impl Generator{
                 let other_count = get_other_cnt(_cfg.avg_relation_other_cnt_priv, _cfg.std_relation_other_cnt_priv);
 
                 for j in 0..friends_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
-                    loc_relations.push(rel);
-
                     if rng.gen_range(0..10) > 3{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
-                        loc_relations.push(inv_rel);
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
+                        loc_relations.push(rel);
+
+                        if rng.gen_range(0..10) > 5{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
+                            loc_relations.push(inv_rel);
+                        }
                     }
                 }
 
                 for j in 0..family_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
-                    loc_relations.push(rel);
-
                     if rng.gen_range(0..10) > 3{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
-                        loc_relations.push(inv_rel);
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
+                        loc_relations.push(rel);
+
+                        if rng.gen_range(0..10) > 5{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
+                            loc_relations.push(inv_rel);
+                        }
                     }
 
                 }
 
                 for j in 0..other_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                    loc_relations.push(rel);
-                    if rng.gen_range(0..10) > 8{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                        loc_relations.push(inv_rel);
+                    if rng.gen_range(0..10) > 5{
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                        loc_relations.push(rel);
+                        if rng.gen_range(0..10) > 5{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                            loc_relations.push(inv_rel);
+                        }
                     }
                 }
             }
@@ -263,35 +269,42 @@ impl Generator{
                 let other_count = get_other_cnt(_cfg.avg_relation_other_cnt_business, _cfg.std_relation_other_cnt_business);
 
                 for j in 0..friends_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
-                    loc_relations.push(rel);
+                    if rng.gen_range(0..10) > 3{
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
+                        loc_relations.push(rel);
 
-                    if rng.gen_range(0..10) > 5{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
-                        loc_relations.push(inv_rel);
+                        if rng.gen_range(0..10) > 5{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FRIEND};
+                            loc_relations.push(inv_rel);
+                        }
                     }
+
                 }
 
                 for j in 0..family_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
-                    loc_relations.push(rel);
-
                     if rng.gen_range(0..10) > 3{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
-                        loc_relations.push(inv_rel);
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
+                        loc_relations.push(rel);
+
+                        if rng.gen_range(0..10) > 3{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::FAMILY};
+                            loc_relations.push(inv_rel);
+                        }
                     }
 
                 }
 
                 for j in 0..other_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                    loc_relations.push(rel);
-                    if rng.gen_range(0..10) > 5{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                        loc_relations.push(inv_rel);
+                    if rng.gen_range(0..10) > 3{
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                        loc_relations.push(rel);
+                        if rng.gen_range(0..10) > 5{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                            loc_relations.push(inv_rel);
+                        }
                     }
                 }
             }
@@ -299,13 +312,15 @@ impl Generator{
             if c.customer_type == CustomerType::PROBE {
                 let other_count = get_other_cnt(_cfg.avg_relation_cnt_probe, _cfg.std_relation_cnt_probe);
                 for j in 0..other_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                    loc_relations.push(rel);
+                    if rng.gen_range(0..10) > 3{
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                        loc_relations.push(rel);
 
-                    if rng.gen_range(0..100) > 88{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                        loc_relations.push(inv_rel);
+                        if rng.gen_range(0..100) > 88{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                            loc_relations.push(inv_rel);
+                        }
                     }
 
                 }
@@ -314,13 +329,15 @@ impl Generator{
             if c.customer_type == CustomerType::SIMBOX {
                 let other_count = get_other_cnt(_cfg.avg_relation_cnt_simbox, _cfg.std_relation_cnt_simbox);
                 for j in 0..other_count{
-                    let to_idx = rng.gen_range(0..=customers.len()-1);
-                    let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                    loc_relations.push(rel);
+                    if rng.gen_range(0..10) > 3{
+                        let to_idx = rng.gen_range(0..=customers.len()-1);
+                        let rel = Relation{from:c.clone(), to:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                        loc_relations.push(rel);
 
-                    if rng.gen_range(0..100) > 88{
-                        let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
-                        loc_relations.push(inv_rel);
+                        if rng.gen_range(0..100) > 88{
+                            let inv_rel = Relation{to:c.clone(), from:customers[to_idx].clone(), relation_type:RelationType::OTHER};
+                            loc_relations.push(inv_rel);
+                        }
                     }
                 }
             }
@@ -328,12 +345,14 @@ impl Generator{
             if c.customer_type == CustomerType::MULTISIM {
                 let other_count = get_other_cnt(_cfg.avg_relation_cnt_multi, _cfg.std_relation_cnt_multi);
                 for j in 0..other_count{
-                    let rel = Relation{from:c.clone(), to:customers[rng.gen_range(0..=customers.len()-1)].clone(), relation_type:RelationType::OTHER};
-                    loc_relations.push(rel);
+                    if rng.gen_range(0..10) > 3{
+                        let rel = Relation{from:c.clone(), to:customers[rng.gen_range(0..=customers.len()-1)].clone(), relation_type:RelationType::OTHER};
+                        loc_relations.push(rel);
 
-                    if rng.gen_range(0..100) > 55{
-                        let inv_rel = Relation{to:c.clone(), from:customers[rng.gen_range(0..=customers.len()-1)].clone(), relation_type:RelationType::OTHER};
-                        loc_relations.push(inv_rel);
+                        if rng.gen_range(0..100) > 55{
+                            let inv_rel = Relation{to:c.clone(), from:customers[rng.gen_range(0..=customers.len()-1)].clone(), relation_type:RelationType::OTHER};
+                            loc_relations.push(inv_rel);
+                        }
                     }
                 }
             }
@@ -357,15 +376,17 @@ impl Generator{
 
     fn save_batch(&self, _batch:Vec<CDR>){
         
-        let file_exists = Path::new(&self.cfg.resut_filename).exists();
+        let file_exists = Path::new(&self.cfg.detailed_resut_filename).exists();
         // let file = File::create(_dest).unwrap();
         let file = OpenOptions::new()
             .append(true)
             .create(true)
-            .open(&self.cfg.resut_filename).unwrap();
+            .open(&self.cfg.detailed_resut_filename).unwrap();
     
-        let mut wtr = WriterBuilder::new().has_headers(!file_exists).from_writer(file);
+        let mut wtr = WriterBuilder::new().has_headers(!file_exists).delimiter(b';').from_writer(file);
     
+        // println!("saving to file... size:{} ", _batch.len());
+
         for cdr in _batch {
             wtr.serialize(cdr);
         }
@@ -406,8 +427,8 @@ impl Generator{
 
             curr_rel = curr_rel + 1;
 
-            if curr_rel % 20000 == 0 {
-                println!("Completed {}/{} relations", curr_rel, total_relations);
+            if curr_rel % 100000 == 0 {
+                println!("completed: {}/{} relations, cdr batch: {}", curr_rel, total_relations, cdr_batch.len());
             }
 
 
@@ -425,11 +446,11 @@ impl Generator{
                     }
 
                     if &r.from.customer_type == &CustomerType::BUSINESS {
-                        bts_num = get_bts(self.cfg.number_of_bts as u32);
+                        bts_num = get_bts((self.cfg.number_of_bts/2) as u32);
                     }
 
                     if &r.from.customer_type == &CustomerType::MULTISIM {
-                        bts_num = get_bts(self.cfg.number_of_bts as u32);
+                        bts_num = get_bts((self.cfg.number_of_bts/3) as u32);
                     }
 
                     if &r.from.customer_type == &CustomerType::PROBE {
@@ -438,7 +459,7 @@ impl Generator{
                     }
 
                     if &r.from.customer_type == &CustomerType::SIMBOX {
-                        bts_num = get_bts((self.cfg.number_of_bts/15) as u32);
+                        bts_num = get_bts((self.cfg.number_of_bts/3) as u32);
                         simbox = 1;
                     }
 
@@ -578,6 +599,36 @@ impl Generator{
             }
 
         }
+
+//random calls
+        // for i in 0..1000{
+        //     let from_idx = rng.gen_range(0..=self.customers.len()-1);
+        //     let to_idx = rng.gen_range(0..=self.customers.len()-1);
+
+        //     let tmp_cdr:CDR = CDR { 
+        //         timestamp: get_start_time(year, month).to_string(), 
+        //         duration_sec: self.get_duration(&r.from.customer_type), 
+        //         from_msisdn: r.from.msisdn, 
+        //         to_msisdn: r.to.msisdn, 
+        //         from_imei: r.from.imei, 
+        //         to_imei: r.to.imei, 
+        //         from_operator_id: r.from.operator.operator_id, 
+        //         to_operator_id: r.to.operator.operator_id, 
+        //         bts_id: bts_num, 
+        //         contact_type: ContactType::VOICE, 
+        //         customer_type: r.from.customer_type.clone(),
+        //         roaming: r.from.operator.intl, 
+        //         probe: probe, 
+        //         simbox: simbox };
+
+        //         cdr_batch.push(tmp_cdr);
+
+        //     if pos >= self.cfg.batch_size{
+        //         pos = 0;
+        //         self.save_batch(cdr_batch.clone());
+        //         cdr_batch.clear();
+        //     }
+        // }
 
         self.save_batch(cdr_batch.clone());
 

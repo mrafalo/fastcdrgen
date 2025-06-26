@@ -68,7 +68,8 @@ pub struct Config {
 
     pub start_date:String,
     pub batch_size:u32,
-    pub resut_filename:String,
+    pub detailed_resut_filename:String,
+    pub agg_resut_filename:String,
     pub priv_prc:f32,
     
     pub simbox_duration_distribution:consts::DistributionType, 

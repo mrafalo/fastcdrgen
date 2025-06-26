@@ -84,7 +84,8 @@ multi_duration_distribution = 'NORMAL'
 # Technical
 start_date = '2024-05-01'
 batch_size = 100000
-resut_filename = 'results/cdr2.csv'
+detailed_resut_filename = 'results/cdr.csv'
+agg_resut_filename = 'results/cdr_agg.csv'
 ```
 
 ---
@@ -107,16 +108,16 @@ resut_filename = 'results/cdr2.csv'
 
 ## Usage
 1. **Prepare Configuration File**:
-   Customize the sample configuration file and save it as `config.ini`.
+   Customize the sample configuration file and save it as `config.toml`.
 
 2. **Run the Generator**:
    Use the following command to generate the CDR dataset:
    ```bash
-   ./fastcdrgen --config config.ini
+   ./fastcdrgen
    ```
 
 3. **Output**:
-   The generated dataset will be saved to the file specified in `resut_filename` (default: `results/cdr2.csv`).
+   The generated dataset will be saved to the file specified in `resut_filename`.
 
 ---
 
