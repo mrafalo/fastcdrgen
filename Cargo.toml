@@ -17,3 +17,4 @@ rand = "0.8.5"
 rand_distr = "0.4.3"
 serde = { version = "1.0", features = ["derive"] }
 special = "0.10.3"
+uuid = {version="1.17.0", features = ["v4", "serde"]}

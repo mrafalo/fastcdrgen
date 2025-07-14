@@ -4,6 +4,7 @@ use crate::customer::Customer;
 pub enum RelationType {
     FRIEND,
     FAMILY,
+    BUSINESS,
     OTHER,
 }
 

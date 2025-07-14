@@ -1,11 +1,9 @@
 
 use std::{path::Path, time::Instant};
 use std::fs;
-use generator::{cdr::CDR, config::Config, consts, customer::Customer, generator::Generator, operator::Operator, utils::{draw_integer_from_cauchy, draw_integer_from_normal, draw_integer_from_poisson, draw_integer_from_weibull}};
+use generator::{ config::Config, consts, generator::Generator};
 use config_file::FromConfigFile;
 use polars::prelude::*;
-use std::fs::File;
-use std::io::Result;
 
 fn remove_file_if_exists(_path: &str) {
     let file_path = Path::new(_path);
@@ -77,18 +75,25 @@ fn main() {
     println!("Starting for config: {:?}...", consts::CONFIG_FILE);
     let cfg = Config::from_config_file(consts::CONFIG_FILE).unwrap();
     let gen = Generator::new(cfg.clone());
-    
-    remove_file_if_exists(&cfg.detailed_resut_filename);
-    remove_file_if_exists(&cfg.agg_resut_filename);
+
+    for (name, profile) in &cfg.scenarios {
+        println!("Profile name: {}", name);
+        println!("  customer_profile: {:?}", profile.customer_profile);
+        println!("  customer_type: {:?}", profile.customer_type);
+    }
+
+
+    remove_file_if_exists(&cfg.technical.detailed_resut_filename);
+    remove_file_if_exists(&cfg.technical.agg_resut_filename);
     
     let total_cnt = gen.generate_cdr();
     let duration = start.elapsed();
     let elapsed_minutes = duration.as_secs_f64() / 60.0;
 
     println!("Elapsed time: {:.2} minutes...", elapsed_minutes );
-    println!("Number of CDR generated: {:?}, result file: {:?}", total_cnt, cfg.detailed_resut_filename);
+    println!("Number of CDR generated: {:?}, result file: {:?}", total_cnt, cfg.technical.detailed_resut_filename);
 
-    aggregate_results(&cfg.detailed_resut_filename, &cfg.agg_resut_filename);
+    //aggregate_results(&cfg.detailed_resut_filename, &cfg.agg_resut_filename);
 
     gen.print_summary();
 

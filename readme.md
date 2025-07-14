@@ -14,78 +14,210 @@
 The tool uses a configuration file to control the simulation parameters. Below is a sample configuration:
 
 ```ini
-# General
+[market]
 number_of_local_customers = 10000
-number_of_intl_customers = 100
-number_of_local_operators = 4
-number_of_intl_operators = 2
-number_of_bts = 100
-simbox_prc = 0.005
-probe_prc = 0.05
-multisim_prc = 0.01
-priv_prc = 0.7
+number_of_intl_customers = 50
+local_operators = [0.4, 0.3, 0.3]
+intl_operators = [0.5, 0.2, 0.3]
+number_of_own_bts = 20
+number_of_external_bts = 10
+random_noise_prc = 0.05
 
-# Relations
-avg_relation_friends_cnt_priv = 5
-std_relation_friends_cnt_priv = 10
-avg_relation_family_cnt_priv = 5
-std_relation_family_cnt_priv = 3
-avg_relation_other_cnt_priv = 3
-std_relation_other_cnt_priv = 5
-avg_relation_friends_cnt_business = 10
-std_relation_friends_cnt_business = 4
-avg_relation_family_cnt_business = 3
-std_relation_family_cnt_business = 3
-avg_relation_other_cnt_business = 10
-std_relation_other_cnt_business = 10
-avg_relation_cnt_probe = 20
-std_relation_cnt_probe = 20
-avg_relation_cnt_simbox = 20
-std_relation_cnt_simbox = 30
-avg_relation_cnt_multi = 40
-std_relation_cnt_multi = 20
+[private]
+customer_type = "PRIVATE"
+customer_profile = "NORMAL"
+profile_occurence_prc = 0.6
+call_duration_distribution = "NORMAL"
+avg_call_duration = 110
+std_call_duration = 15
+avg_relation_friends_cnt = 3
+std_relation_friends_cnt = 4
+avg_relation_family_cnt = 3
+std_relation_family_cnt = 3
+avg_relation_business_cnt = 2
+std_relation_business_cnt = 7
+avg_relation_other_cnt = 3
+std_relation_other_cnt = 1
+avg_calls_cnt_per_relation = 5
+std_calls_cnt_per_relation = 3
+avg_sms_cnt_per_relation = 5
+std_sms_cnt_per_relation = 2
+avg_mms_cnt_per_relation = 2
+std_mms_cnt_per_relation = 1
+msisdn_per_imei = 1
+bts_used_prc = 0.8
+call_success_prc = 0.7
+inverse_relation_prob = 0.2
+relation_prob = 0.2
 
-# Calls
-avg_calls_cnt_per_relation_probe = 20
-stdev_calls_cnt_per_relation_probe = 10
-avg_calls_cnt_per_relation_simbox = 20
-stdev_calls_cnt_per_relation_simbox = 10
-avg_calls_cnt_per_relation_multi = 20
-stdev_calls_cnt_per_relation_multi = 5
+[business]
+customer_type = "BUSINESS"
+customer_profile = "NORMAL"
+profile_occurence_prc = 0.5
+call_duration_distribution = "NORMAL"
+avg_call_duration = 130
+std_call_duration = 43
+avg_relation_friends_cnt = 6
+std_relation_friends_cnt = 4
+avg_relation_family_cnt = 4
+std_relation_family_cnt = 3
+avg_relation_business_cnt = 10
+std_relation_business_cnt = 7
+avg_relation_other_cnt = 5
+std_relation_other_cnt = 5
 avg_calls_cnt_per_relation = 4
-stdev_calls_cnt_per_relation = 4
+std_calls_cnt_per_relation = 5
+avg_sms_cnt_per_relation = 10
+std_sms_cnt_per_relation = 3
+avg_mms_cnt_per_relation = 2
+std_mms_cnt_per_relation = 1
+msisdn_per_imei = 1
+bts_used_prc = 0.9
+call_success_prc = 0.5
+inverse_relation_prob = 0.3
+relation_prob = 0.2
+
+[mixed]
+customer_type = "MIXED"
+customer_profile = "NORMAL"
+profile_occurence_prc = 0.05
+call_duration_distribution = "WEIBULL"
+avg_call_duration = 100
+std_call_duration = 20
+avg_relation_friends_cnt = 3
+std_relation_friends_cnt = 3
+avg_relation_family_cnt = 3
+std_relation_family_cnt = 3
+avg_relation_business_cnt = 7
+std_relation_business_cnt = 4
+avg_relation_other_cnt = 5
+std_relation_other_cnt = 5
+avg_calls_cnt_per_relation = 4
+std_calls_cnt_per_relation = 4
+avg_sms_cnt_per_relation = 3
+std_sms_cnt_per_relation = 3
+avg_mms_cnt_per_relation = 2
+std_mms_cnt_per_relation = 1
+msisdn_per_imei = 1
+bts_used_prc = 0.9
+call_success_prc = 0.6
+inverse_relation_prob = 0.1
+relation_prob = 0.4
+
+[multisim]
+customer_type = "MULTISIM"
+customer_profile = "NORMAL"
+profile_occurence_prc = 0.001
+call_duration_distribution = "WEIBULL"
+avg_call_duration = 90
+std_call_duration = 30
+avg_relation_friends_cnt = 3
+std_relation_friends_cnt = 1
+avg_relation_family_cnt = 2
+std_relation_family_cnt = 1
+avg_relation_business_cnt = 3
+std_relation_business_cnt = 2
+avg_relation_other_cnt = 3
+std_relation_other_cnt = 1
+avg_calls_cnt_per_relation = 8
+std_calls_cnt_per_relation = 3
 avg_sms_cnt_per_relation = 4
-stdev_sms_cnt_per_relation = 8
-avg_mms_cnt_per_relation = 4
-stdev_mms_cnt_per_relation = 4
+std_sms_cnt_per_relation = 2
+avg_mms_cnt_per_relation = 1
+std_mms_cnt_per_relation = 1
+msisdn_per_imei = 4
+bts_used_prc = 0.3
+call_success_prc = 0.4
+inverse_relation_prob = 0.1
+relation_prob = 0.1
 
-# Durations
-avg_call_duration_priv = 413
-std_call_duration_priv = 60
-avg_call_duration_business = 600
-std_call_duration_business = 70
-avg_call_duration_probe = 413
-std_call_duration_probe = 60
-avg_call_duration_simbox = 413
-std_call_duration_simbox = 60
-avg_call_duration_multi = 415
-std_call_duration_multi = 60
+[simbox]
+customer_type = "SIMBOX"
+customer_profile = "FRAUD"
+profile_occurence_prc = 0.001
+call_duration_distribution = "WEIBULL"
+avg_call_duration = 110
+std_call_duration = 15
+avg_relation_friends_cnt = 6
+std_relation_friends_cnt = 15
+avg_relation_family_cnt = 3
+std_relation_family_cnt = 3
+avg_relation_business_cnt = 4
+std_relation_business_cnt = 10
+avg_relation_other_cnt = 5
+std_relation_other_cnt = 5
+avg_calls_cnt_per_relation = 11
+std_calls_cnt_per_relation = 10
+avg_sms_cnt_per_relation = 2
+std_sms_cnt_per_relation = 2
+avg_mms_cnt_per_relation = 1
+std_mms_cnt_per_relation = 1
+msisdn_per_imei = 50
+bts_used_prc = 0.2
+call_success_prc = 0.7
+relation_prob = 0.4
+inverse_relation_prob = 0.01
 
-avg_sms_cnt = 3
-avg_mms_cnt = 2
+[probe]
+customer_type = "PROBE"
+customer_profile = "ANOMALY"
+profile_occurence_prc = 0.001
+call_duration_distribution = "WEIBULL"
+avg_call_duration = 110
+std_call_duration = 15
+avg_relation_friends_cnt = 6
+std_relation_friends_cnt = 15
+avg_relation_family_cnt = 3
+std_relation_family_cnt = 3
+avg_relation_business_cnt = 4
+std_relation_business_cnt = 10
+avg_relation_other_cnt = 5
+std_relation_other_cnt = 5
+avg_calls_cnt_per_relation = 11
+std_calls_cnt_per_relation = 10
+avg_sms_cnt_per_relation = 2
+std_sms_cnt_per_relation = 2
+avg_mms_cnt_per_relation = 1
+std_mms_cnt_per_relation = 1
+msisdn_per_imei = 50
+bts_used_prc = 0.2
+call_success_prc = 0.8
+relation_prob = 0.4
+inverse_relation_prob = 0.01
 
-# Distributions
-simbox_duration_distribution = 'WEIBULL'
-probe_duration_distribution = 'POISON'
-business_duration_distribution = 'NORMAL'
-priv_duration_distribution = 'NORMAL'
-multi_duration_distribution = 'NORMAL'
+[churn]
+customer_type = "PRIVATE"
+customer_profile = "CHURN"
+profile_occurence_prc = 0.001
+call_duration_distribution = "WEIBULL"
+avg_call_duration = 110
+std_call_duration = 15
+avg_relation_friends_cnt = 3
+std_relation_friends_cnt = 3
+avg_relation_family_cnt = 3
+std_relation_family_cnt = 3
+avg_relation_business_cnt = 5
+std_relation_business_cnt = 2
+avg_relation_other_cnt = 5
+std_relation_other_cnt = 5
+avg_calls_cnt_per_relation = 5
+std_calls_cnt_per_relation = 1
+avg_sms_cnt_per_relation = 2
+std_sms_cnt_per_relation = 2
+avg_mms_cnt_per_relation = 1
+std_mms_cnt_per_relation = 1
+msisdn_per_imei = 1
+bts_used_prc = 0.9
+call_success_prc = 0.7
+relation_prob = 0.2
+inverse_relation_prob = 0.2
 
-# Technical
-start_date = '2024-05-01'
-batch_size = 100000
-detailed_resut_filename = 'results/cdr.csv'
-agg_resut_filename = 'results/cdr_agg.csv'
+[technical]
+start_date = "2025-01-01"
+batch_size = 200000
+detailed_resut_filename = "results/sample.csv"
+agg_resut_filename = "results/cdr4_agg.csv"
+
 ```
 
 ---
